@@ -99,15 +99,11 @@
 
   window.addEventListener("load", () => {
     run();
+
+    new MutationObserver(mutations => {
+      mutations.forEach(() => {
+        run();
+      });
+    }).observe(document.body, { childList: true });
   }, false);
-
-  window.addEventListener("popstate", () => {
-    run();
-  });
-
-  new MutationObserver(mutations => {
-    mutations.forEach(() => {
-      run();
-    });
-  }).observe(document.body, { childList: true });
 })();
