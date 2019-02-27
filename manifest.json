@@ -6,7 +6,9 @@
     "content_scripts": [
         {
             "matches": [
-                "https://tech.nikkeibp.co.jp/*"
+                "https://tech.nikkeibp.co.jp/*",
+                "https://www.nikkei.com/*",
+                "https://note.mu/*"
             ],
             "js": [
                 "main.js"
