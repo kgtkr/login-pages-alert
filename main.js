@@ -1,47 +1,70 @@
 (() => {
+  let cur = location.href;
+  //null:開いてない、undefined:閉じた、文字列:type
+  let isOpen = null;
+
   function insertHTML(type) {
-    close();
-    const el = document.createElement("div");
-    el.className = "login-pages-alert";
-    const msg = document.createElement("div");
-    msg.className = "msg";
-    msg.innerText = `このページは最後まで読むのに${type}会員登録が必要です。`;
-    el.appendChild(msg);
-    const by = document.createElement("div");
-    by.className = "by";
-    by.innerText = "by Login Pages Alert";
-    el.appendChild(by);
-    const button = document.createElement("a");
-    button.className = "close";
-    button.innerText = "[閉じる]";
-    button.onclick = close;
-    el.appendChild(button);
+    if (isOpen === undefined) {
+      return;
+    }
 
-    document.body.insertAdjacentElement("afterbegin", el);
-  }
+    if (isOpen !== type) {
+      close();
+      isOpen = null;
+    }
 
-  function close() {
-    for (let el of document.getElementsByClassName("login-pages-alert")) {
-      document.body.removeChild(el);
+    if (isOpen === null) {
+      const el = document.createElement("div");
+      el.className = "login-pages-alert";
+      const msg = document.createElement("div");
+      msg.className = "msg";
+      msg.innerText = `このページは最後まで読むのに${type}会員登録が必要です。`;
+      el.appendChild(msg);
+      const by = document.createElement("div");
+      by.className = "by";
+      by.innerText = "by Login Pages Alert";
+      el.appendChild(by);
+      const button = document.createElement("a");
+      button.className = "close";
+      button.innerText = "[閉じる]";
+      button.onclick = close;
+      el.appendChild(button);
+
+      document.body.insertAdjacentElement("afterbegin", el);
+      isOpen = type;
     }
   }
 
-  function pageLoad() {
-    setTimeout(() => {
-      close();
-      const body = document.body.innerHTML;
+  function close() {
+    if (typeof isOpen === "string") {
+      for (let el of document.getElementsByClassName("login-pages-alert")) {
+        document.body.removeChild(el);
+      }
+      isOpen = undefined;
+    }
+  }
 
-      loop: for (let site of list) {
-        if (location.href.includes(site.url)) {
-          for (let data of site.data) {
-            if (data.matchs.every(x => body.includes(x))) {
-              insertHTML(data.type);
-              break loop;
-            }
+  function run() {
+    console.log("login-pages-alert:run");
+    if (cur !== location.href) {
+      close();
+      cur = location.href;
+      isOpen = null;
+    }
+    const body = document.body.innerHTML;
+
+    for (let site of list) {
+      if (location.href.includes(site.url)) {
+        for (let data of site.data) {
+          if (data.matchs.every(x => body.includes(x))) {
+            insertHTML(data.type);
+            return;
           }
         }
       }
-    }, 1000);
+    }
+
+    close();
   }
 
   const list = [
@@ -75,30 +98,16 @@
   ];
 
   window.addEventListener("load", () => {
-    pageLoad();
+    run();
   }, false);
 
-  function addCallback(cons, name, f) {
-    cons.prototype[name] = function (...params) {
-      console.log(cons, name);
-      const res = this[name](...params);
-      f(params, res);
-      return res;
-    };
-  }
-  addCallback(History, "pushState", () => {
-    pageLoad();
+  window.addEventListener("popstate", () => {
+    run();
   });
-  addCallback(History, "replaceState", () => {
-    pageLoad();
-  });
-  addCallback(History, "back", () => {
-    pageLoad();
-  });
-  addCallback(History, "forward", () => {
-    pageLoad();
-  });
-  addCallback(History, "go", () => {
-    pageLoad();
-  });
+
+  new MutationObserver(mutations => {
+    mutations.forEach(() => {
+      run();
+    });
+  }).observe(document.body, { childList: true });
 })();
