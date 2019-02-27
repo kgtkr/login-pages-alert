@@ -56,7 +56,7 @@
     for (let site of list) {
       if (location.href.includes(site.url)) {
         for (let data of site.data) {
-          if (data.matchs.every(x => body.includes(x))) {
+          if (data.matchs.some(x => x.every(x => body.includes(x)))) {
             insertHTML(data.type);
             return;
           }
@@ -73,7 +73,7 @@
       data: [
         {
           type: "有料",
-          matchs: ["この先は有料会員の登録が必要です。"]
+          matchs: [["この先は有料会員の登録が必要です。"]]
         },
       ]
     },
@@ -82,7 +82,7 @@
       data: [
         {
           type: "",
-          matchs: ["この記事は会員限定です。"]
+          matchs: [["この記事は会員限定です。"]]
         }
       ]
     },
@@ -91,7 +91,7 @@
       data: [
         {
           type: "有料",
-          matchs: ["この続きをみるには", "ノートを購入する"],
+          matchs: [["この続きをみるには", "ノートを購入する"]],
         }
       ]
     },
@@ -100,7 +100,7 @@
       data: [
         {
           type: "有料",
-          matchs: ["readmore-area"]
+          matchs: [["readmore-area"]]
         }
       ]
     },
@@ -109,7 +109,7 @@
       data: [
         {
           type: "有料",
-          matchs: ["この記事は有料記事です。"]
+          matchs: [["この記事は有料記事です。"]]
         }
       ]
     },
@@ -118,7 +118,7 @@
       data: [
         {
           type: "有料",
-          matchs: ["こちらは有料会員記事です"]
+          matchs: [["こちらは有料会員記事です"]]
         }
       ]
     },
@@ -127,11 +127,11 @@
       data: [
         {
           type: "",
-          matchs: ["無料登録して全文を読む"]
+          matchs: [["無料登録して全文を読む"]]
         },
         {
           type: "有料",
-          matchs: ["有料会員になると続きをお読みいただけます。"]
+          matchs: [["有料会員になると続きをお読みいただけます。"]]
         }
       ]
     }
