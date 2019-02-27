@@ -142,8 +142,8 @@
   }, false);
 
   new MutationObserver(mutations => {
-    mutations.forEach(() => {
+    if (mutations.length !== 0) {
       run();
-    });
+    }
   }).observe(document.body, { childList: true });
 })();
