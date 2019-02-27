@@ -91,7 +91,47 @@
       data: [
         {
           type: "有料",
-          matchs: ["この続きをみるには"]
+          matchs: ["この続きをみるには", "ノートを購入する"],
+        }
+      ]
+    },
+    {
+      url: "https://www.kobe-np.co.jp",
+      data: [
+        {
+          type: "有料",
+          matchs: ["readmore-area"]
+        }
+      ]
+    },
+    {
+      url: "https://mainichi.jp",
+      data: [
+        {
+          type: "有料",
+          matchs: ["この記事は有料記事です。"]
+        }
+      ]
+    },
+    {
+      url: "https://special.sankei.com",
+      data: [
+        {
+          type: "有料",
+          matchs: ["こちらは有料会員記事です"]
+        }
+      ]
+    },
+    {
+      url: "https://www.asahi.com",
+      data: [
+        {
+          type: "",
+          matchs: ["無料登録して全文を読む"]
+        },
+        {
+          type: "有料",
+          matchs: ["有料会員になると続きをお読みいただけます。"]
         }
       ]
     }
@@ -99,11 +139,11 @@
 
   window.addEventListener("load", () => {
     run();
-
-    new MutationObserver(mutations => {
-      mutations.forEach(() => {
-        run();
-      });
-    }).observe(document.body, { childList: true });
   }, false);
+
+  new MutationObserver(mutations => {
+    mutations.forEach(() => {
+      run();
+    });
+  }).observe(document.body, { childList: true });
 })();

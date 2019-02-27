@@ -8,7 +8,11 @@
             "matches": [
                 "https://tech.nikkeibp.co.jp/*",
                 "https://www.nikkei.com/*",
-                "https://note.mu/*"
+                "https://note.mu/*",
+                "https://www.kobe-np.co.jp/*",
+                "https://mainichi.jp/*",
+                "https://special.sankei.com/*",
+                "https://www.asahi.com/*"
             ],
             "js": [
                 "main.js"
