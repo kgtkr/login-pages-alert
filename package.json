@@ -4,21 +4,23 @@
   "description": "ログインなしだと途中までしか読めないニュース記事を警告するChrome拡張です。",
   "main": "main.js",
   "dependencies": {
-    "matcher": "^1.1.1"
+    "matcher": "^1.1.1",
+    "webextension-polyfill-ts": "^0.8.9"
   },
   "devDependencies": {
-    "@types/chrome": "0.0.81",
     "@types/matcher": "^1.1.0",
     "clean-webpack-plugin": "^1.0.1",
     "copy-webpack-plugin": "^5.0.0",
     "source-map-loader": "^0.2.4",
     "ts-loader": "^5.3.3",
     "typescript": "^3.3.3333",
+    "web-ext": "^3.0.0",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3"
   },
   "scripts": {
     "start": "webpack -w --mode development",
+    "start:firefox": "webpack --mode development && web-ext run -s dist/",
     "build": "webpack -p --mode production&&zip -R dist.zip dist"
   },
   "repository": {
