@@ -12,7 +12,8 @@
                 "https://www.kobe-np.co.jp/*",
                 "https://mainichi.jp/*",
                 "https://special.sankei.com/*",
-                "https://www.asahi.com/*"
+                "https://www.asahi.com/*",
+                "https://r.nikkei.com/*"
             ],
             "js": [
                 "app.js"
