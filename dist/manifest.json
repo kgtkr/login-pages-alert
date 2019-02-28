@@ -15,7 +15,7 @@
                 "https://www.asahi.com/*"
             ],
             "js": [
-                "main.js"
+                "app.js"
             ],
             "css": [
                 "main.css"
