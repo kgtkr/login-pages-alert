@@ -1,6 +1,7 @@
 # Login Pages Alert
-ログインなしだと途中までしか読めないニュース記事を警告するChrome拡張です。
-[Chrome Web Store](https://chrome.google.com/webstore/detail/login-pages-alert/kigbdllhpnfofcbekcbfnegnibooglka)
+ログインなしだと途中までしか読めないニュース記事を警告するブラウザ拡張です。
+* [Chrome](https://chrome.google.com/webstore/detail/login-pages-alert/kigbdllhpnfofcbekcbfnegnibooglka)
+* [Firefox](https://addons.mozilla.org/ja/firefox/addon/login-pages-alert/)
 
 # 開発
 ## watchモード
