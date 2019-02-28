@@ -83,7 +83,7 @@ const list = [
     data: [
       {
         type: "",
-        matchs: [["この記事は会員限定です。"]]
+        matchs: [["この記事は会員限定です"]]
       }
     ]
   },
