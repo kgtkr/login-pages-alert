@@ -70,7 +70,7 @@ function run() {
 
 const list = [
   {
-    url: "https://tech.nikkeibp.co.jp",
+    url: "https://tech.nikkeibp.co.jp/*",
     data: [
       {
         type: "有料",
@@ -79,7 +79,7 @@ const list = [
     ]
   },
   {
-    url: "https://www.nikkei.com",
+    url: "https://www.nikkei.com/*",
     data: [
       {
         type: "",
@@ -88,7 +88,7 @@ const list = [
     ]
   },
   {
-    url: "https://note.mu",
+    url: "https://note.mu/*",
     data: [
       {
         type: "有料",
@@ -97,7 +97,7 @@ const list = [
     ]
   },
   {
-    url: "https://www.kobe-np.co.jp",
+    url: "https://www.kobe-np.co.jp/*",
     data: [
       {
         type: "有料",
@@ -106,7 +106,7 @@ const list = [
     ]
   },
   {
-    url: "https://mainichi.jp",
+    url: "https://mainichi.jp/*",
     data: [
       {
         type: "有料",
@@ -115,7 +115,7 @@ const list = [
     ]
   },
   {
-    url: "https://special.sankei.com",
+    url: "https://special.sankei.com/*",
     data: [
       {
         type: "有料",
@@ -124,7 +124,7 @@ const list = [
     ]
   },
   {
-    url: "https://www.asahi.com",
+    url: "https://www.asahi.com/*",
     data: [
       {
         type: "",
