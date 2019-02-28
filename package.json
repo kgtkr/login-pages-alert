@@ -19,7 +19,7 @@
   },
   "scripts": {
     "start": "webpack -w --mode development",
-    "build": "webpack -p --mode production&&cd dist&&zip -r ../dist.zip *"
+    "build": "webpack -p --mode production&&(cd dist&&zip -r ../dist.zip *)&&git archive HEAD --output=src.zip"
   },
   "repository": {
     "type": "git",
