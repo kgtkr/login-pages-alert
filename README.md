@@ -2,6 +2,17 @@
 ログインなしだと途中までしか読めないニュース記事を警告するChrome拡張です。
 [Chrome Web Store](https://chrome.google.com/webstore/detail/login-pages-alert/kigbdllhpnfofcbekcbfnegnibooglka)
 
+# 開発
+## watchモード
+```
+npm start
+```
+
+## ビルド
+```
+npm run build
+```
+
 ## 対応サイト
 追加要望等はissueか[Twitter](https://twitter.com/kgtkr)にお願いします。
 
