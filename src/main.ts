@@ -1,3 +1,5 @@
+import * as matcher from "matcher";
+
 let cur = location.href;
 //null:開いてない、undefined:閉じた、文字列:type
 let isOpen: string | null | undefined = null;
@@ -53,7 +55,7 @@ function run() {
   const body = document.body.innerHTML;
 
   for (let site of list) {
-    if (location.href.includes(site.url)) {
+    if (matcher.isMatch(location.href, site.url, { caseSensitive: true })) {
       for (let data of site.data) {
         if (data.matchs.some(x => x.every(x => body.includes(x)))) {
           insertHTML(data.type);

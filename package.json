@@ -4,10 +4,10 @@
   "description": "ログインなしだと途中までしか読めないニュース記事を警告するChrome拡張です。",
   "main": "main.js",
   "dependencies": {
-    "minimatch": "^3.0.4"
+    "matcher": "^1.1.1"
   },
   "devDependencies": {
-    "@types/minimatch": "^3.0.3",
+    "@types/matcher": "^1.1.0",
     "clean-webpack-plugin": "^1.0.1",
     "copy-webpack-plugin": "^5.0.0",
     "source-map-loader": "^0.2.4",
