@@ -17,12 +17,8 @@ type alias Flag =
     {}
 
 
-type alias One =
-    { url : List { origin : String, pathname : String }, data : List { prefix : String, matchs : List (List String) } }
-
-
-type alias Data =
-    List One
+type alias Site =
+    { urls : List { origin : String, pathname : String }, data : List { prefix : String, matchs : List (List String) } }
 
 
 type alias Model =

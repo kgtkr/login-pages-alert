@@ -2,7 +2,7 @@ import * as matcher from "matcher";
 
 const list = [
   {
-    url: [
+    urls: [
       {
         origin: "https://tech.nikkeibp.co.jp",
         pathname: "*"
@@ -15,7 +15,7 @@ const list = [
     ]
   },
   {
-    url: [
+    urls: [
       {
         origin: "https://www.nikkei.com",
         pathname: "*"
@@ -33,7 +33,7 @@ const list = [
     ]
   },
   {
-    url: [
+    urls: [
       {
         origin: "https://note.mu",
         pathname: "*"
@@ -47,7 +47,7 @@ const list = [
     ]
   },
   {
-    url: [
+    urls: [
       {
         origin: "https://www.kobe-np.co.jp",
         pathname: "*"
@@ -61,7 +61,7 @@ const list = [
     ]
   },
   {
-    url: [
+    urls: [
       {
         origin: "https://mainichi.jp",
         pathname: "*"
@@ -75,7 +75,7 @@ const list = [
     ]
   },
   {
-    url: [
+    urls: [
       {
         origin: "https://special.sankei.com",
         pathname: "*"
@@ -89,7 +89,7 @@ const list = [
     ]
   },
   {
-    url: [
+    urls: [
       {
         origin: "https://www.asahi.com",
         pathname: "*"
@@ -163,7 +163,7 @@ function run() {
   const body = document.body.innerHTML;
 
   for (let site of list) {
-    if (site.url.some(url => matcher.isMatch(location.origin, url.origin, { caseSensitive: true }) && matcher.isMatch(location.pathname, url.pathname, { caseSensitive: true }))) {
+    if (site.urls.some(url => matcher.isMatch(location.origin, url.origin, { caseSensitive: true }) && matcher.isMatch(location.pathname, url.pathname, { caseSensitive: true }))) {
       for (let data of site.data) {
         if (data.matchs.some(x => x.every(x => body.includes(x)))) {
           insertHTML(data.prefix);
