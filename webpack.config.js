@@ -30,6 +30,14 @@ module.exports = {
         test: /\.js$/,
         loader: "source-map-loader"
       },
+      {
+        test: /\.elm$/,
+        exclude: [/elm-stuff/, /node_modules/],
+        use: {
+          loader: "elm-webpack-loader",
+          options: {}
+        }
+      }
     ]
   },
 };
