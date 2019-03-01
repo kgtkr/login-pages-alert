@@ -10,7 +10,7 @@ const list = [
     kinds: [
       {
         name: "有料",
-        body: [["この先は有料会員の登録が必要です。"]]
+        patterns: [["この先は有料会員の登録が必要です。"]]
       },
     ]
   },
@@ -28,7 +28,7 @@ const list = [
     kinds: [
       {
         name: "",
-        body: [["この記事は会員限定です"]]
+        patterns: [["この記事は会員限定です"]]
       }
     ]
   },
@@ -42,7 +42,7 @@ const list = [
     kinds: [
       {
         name: "有料",
-        body: [["この続きをみるには", "ノートを購入する"]],
+        patterns: [["この続きをみるには", "ノートを購入する"]],
       }
     ]
   },
@@ -56,7 +56,7 @@ const list = [
     kinds: [
       {
         name: "有料",
-        body: [["readmore-area"]]
+        patterns: [["readmore-area"]]
       }
     ]
   },
@@ -70,7 +70,7 @@ const list = [
     kinds: [
       {
         name: "有料",
-        body: [["この記事は有料記事です。"]]
+        patterns: [["この記事は有料記事です。"]]
       }
     ]
   },
@@ -84,7 +84,7 @@ const list = [
     kinds: [
       {
         name: "有料",
-        body: [["こちらは有料会員記事です"]]
+        patterns: [["こちらは有料会員記事です"]]
       }
     ]
   },
@@ -98,11 +98,11 @@ const list = [
     kinds: [
       {
         name: "",
-        body: [["無料登録して全文を読む"]]
+        patterns: [["無料登録して全文を読む"]]
       },
       {
         name: "有料",
-        body: [["有料会員になると続きをお読みいただけます。"]]
+        patterns: [["有料会員になると続きをお読みいただけます。"]]
       }
     ]
   }
@@ -165,7 +165,7 @@ function run() {
   for (let site of list) {
     if (site.urls.some(url => matcher.isMatch(location.origin, url.origin, { caseSensitive: true }) && matcher.isMatch(location.pathname, url.pathname, { caseSensitive: true }))) {
       for (let kind of site.kinds) {
-        if (kind.body.some(x => x.every(x => body.includes(x)))) {
+        if (kind.patterns.some(x => x.every(x => body.includes(x)))) {
           insertHTML(kind.name);
           return;
         }
