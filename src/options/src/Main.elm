@@ -18,7 +18,7 @@ type alias Flag =
 
 
 type alias Site =
-    { urls : List { origin : String, pathname : String }, kinds : List { name : String, patterns : List (List String) } }
+    { urlPatterns : List { origin : String, pathname : String }, kinds : List { name : String, bodyPatterns : List (List String) } }
 
 
 type alias Model =

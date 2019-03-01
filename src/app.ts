@@ -2,7 +2,7 @@ import * as matcher from "matcher";
 
 const list = [
   {
-    urls: [
+    urlPatterns: [
       {
         origin: "https://tech.nikkeibp.co.jp",
         pathname: "*"
@@ -10,12 +10,12 @@ const list = [
     kinds: [
       {
         name: "有料",
-        patterns: [["この先は有料会員の登録が必要です。"]]
+        bodyPatterns: [["この先は有料会員の登録が必要です。"]]
       },
     ]
   },
   {
-    urls: [
+    urlPatterns: [
       {
         origin: "https://www.nikkei.com",
         pathname: "*"
@@ -28,12 +28,12 @@ const list = [
     kinds: [
       {
         name: "",
-        patterns: [["この記事は会員限定です"]]
+        bodyPatterns: [["この記事は会員限定です"]]
       }
     ]
   },
   {
-    urls: [
+    urlPatterns: [
       {
         origin: "https://note.mu",
         pathname: "*"
@@ -42,12 +42,12 @@ const list = [
     kinds: [
       {
         name: "有料",
-        patterns: [["この続きをみるには", "ノートを購入する"]],
+        bodyPatterns: [["この続きをみるには", "ノートを購入する"]],
       }
     ]
   },
   {
-    urls: [
+    urlPatterns: [
       {
         origin: "https://www.kobe-np.co.jp",
         pathname: "*"
@@ -56,12 +56,12 @@ const list = [
     kinds: [
       {
         name: "有料",
-        patterns: [["readmore-area"]]
+        bodyPatterns: [["readmore-area"]]
       }
     ]
   },
   {
-    urls: [
+    urlPatterns: [
       {
         origin: "https://mainichi.jp",
         pathname: "*"
@@ -70,12 +70,12 @@ const list = [
     kinds: [
       {
         name: "有料",
-        patterns: [["この記事は有料記事です。"]]
+        bodyPatterns: [["この記事は有料記事です。"]]
       }
     ]
   },
   {
-    urls: [
+    urlPatterns: [
       {
         origin: "https://special.sankei.com",
         pathname: "*"
@@ -84,12 +84,12 @@ const list = [
     kinds: [
       {
         name: "有料",
-        patterns: [["こちらは有料会員記事です"]]
+        bodyPatterns: [["こちらは有料会員記事です"]]
       }
     ]
   },
   {
-    urls: [
+    urlPatterns: [
       {
         origin: "https://www.asahi.com",
         pathname: "*"
@@ -98,11 +98,11 @@ const list = [
     kinds: [
       {
         name: "",
-        patterns: [["無料登録して全文を読む"]]
+        bodyPatterns: [["無料登録して全文を読む"]]
       },
       {
         name: "有料",
-        patterns: [["有料会員になると続きをお読みいただけます。"]]
+        bodyPatterns: [["有料会員になると続きをお読みいただけます。"]]
       }
     ]
   }
@@ -163,9 +163,9 @@ function run() {
   const body = document.body.innerHTML;
 
   for (let site of list) {
-    if (site.urls.some(url => matcher.isMatch(location.origin, url.origin, { caseSensitive: true }) && matcher.isMatch(location.pathname, url.pathname, { caseSensitive: true }))) {
+    if (site.urlPatterns.some(url => matcher.isMatch(location.origin, url.origin, { caseSensitive: true }) && matcher.isMatch(location.pathname, url.pathname, { caseSensitive: true }))) {
       for (let kind of site.kinds) {
-        if (kind.patterns.some(x => x.every(x => body.includes(x)))) {
+        if (kind.bodyPatterns.some(x => x.every(x => body.includes(x)))) {
           insertHTML(kind.name);
           return;
         }
