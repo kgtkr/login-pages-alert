@@ -1,5 +1,113 @@
 import * as matcher from "matcher";
 
+const list = [
+  {
+    url: [
+      {
+        origin: "https://tech.nikkeibp.co.jp",
+        pathname: "*"
+      }],
+    data: [
+      {
+        type: "有料",
+        matchs: [["この先は有料会員の登録が必要です。"]]
+      },
+    ]
+  },
+  {
+    url: [
+      {
+        origin: "https://www.nikkei.com",
+        pathname: "*"
+      },
+      {
+        origin: "https://r.nikkei.com",
+        pathname: "*"
+      }
+    ],
+    data: [
+      {
+        type: "",
+        matchs: [["この記事は会員限定です"]]
+      }
+    ]
+  },
+  {
+    url: [
+      {
+        origin: "https://note.mu",
+        pathname: "*"
+      }
+    ],
+    data: [
+      {
+        type: "有料",
+        matchs: [["この続きをみるには", "ノートを購入する"]],
+      }
+    ]
+  },
+  {
+    url: [
+      {
+        origin: "https://www.kobe-np.co.jp",
+        pathname: "*"
+      }
+    ],
+    data: [
+      {
+        type: "有料",
+        matchs: [["readmore-area"]]
+      }
+    ]
+  },
+  {
+    url: [
+      {
+        origin: "https://mainichi.jp",
+        pathname: "*"
+      }
+    ],
+    data: [
+      {
+        type: "有料",
+        matchs: [["この記事は有料記事です。"]]
+      }
+    ]
+  },
+  {
+    url: [
+      {
+        origin: "https://special.sankei.com",
+        pathname: "*"
+      }
+    ],
+    data: [
+      {
+        type: "有料",
+        matchs: [["こちらは有料会員記事です"]]
+      }
+    ]
+  },
+  {
+    url: [
+      {
+        origin: "https://www.asahi.com",
+        pathname: "*"
+      }
+    ],
+    data: [
+      {
+        type: "",
+        matchs: [["無料登録して全文を読む"]]
+      },
+      {
+        type: "有料",
+        matchs: [["有料会員になると続きをお読みいただけます。"]]
+      }
+    ]
+  }
+];
+
 let cur = location.href;
 //null:開いてない、undefined:閉じた、文字列:type
 let isOpen: string | null | undefined = null;
@@ -55,7 +163,7 @@ function run() {
   const body = document.body.innerHTML;
 
   for (let site of list) {
-    if (site.url.some(url => matcher.isMatch(location.href, url, { caseSensitive: true }))) {
+    if (site.url.some(url => matcher.isMatch(location.origin, url.origin, { caseSensitive: true }) && matcher.isMatch(location.pathname, url.pathname, { caseSensitive: true }))) {
       for (let data of site.data) {
         if (data.matchs.some(x => x.every(x => body.includes(x)))) {
           insertHTML(data.type);
@@ -67,76 +175,6 @@ function run() {
 
   close();
 }
-
-const list = [
-  {
-    url: ["https://tech.nikkeibp.co.jp/*"],
-    data: [
-      {
-        type: "有料",
-        matchs: [["この先は有料会員の登録が必要です。"]]
-      },
-    ]
-  },
-  {
-    url: ["https://www.nikkei.com/*", "https://r.nikkei.com/*"],
-    data: [
-      {
-        type: "",
-        matchs: [["この記事は会員限定です"]]
-      }
-    ]
-  },
-  {
-    url: ["https://note.mu/*"],
-    data: [
-      {
-        type: "有料",
-        matchs: [["この続きをみるには", "ノートを購入する"]],
-      }
-    ]
-  },
-  {
-    url: ["https://www.kobe-np.co.jp/*"],
-    data: [
-      {
-        type: "有料",
-        matchs: [["readmore-area"]]
-      }
-    ]
-  },
-  {
-    url: ["https://mainichi.jp/*"],
-    data: [
-      {
-        type: "有料",
-        matchs: [["この記事は有料記事です。"]]
-      }
-    ]
-  },
-  {
-    url: ["https://special.sankei.com/*"],
-    data: [
-      {
-        type: "有料",
-        matchs: [["こちらは有料会員記事です"]]
-      }
-    ]
-  },
-  {
-    url: ["https://www.asahi.com/*"],
-    data: [
-      {
-        type: "",
-        matchs: [["無料登録して全文を読む"]]
-      },
-      {
-        type: "有料",
-        matchs: [["有料会員になると続きをお読みいただけます。"]]
-      }
-    ]
-  }
-];
 
 window.addEventListener("load", () => {
   run();
