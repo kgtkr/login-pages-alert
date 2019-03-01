@@ -1,0 +1,2 @@
+main =
+  Browser.document
