@@ -9,7 +9,7 @@ const list = [
       }],
     data: [
       {
-        type: "有料",
+        prefix: "有料",
         matchs: [["この先は有料会員の登録が必要です。"]]
       },
     ]
@@ -27,7 +27,7 @@ const list = [
     ],
     data: [
       {
-        type: "",
+        prefix: "",
         matchs: [["この記事は会員限定です"]]
       }
     ]
@@ -41,7 +41,7 @@ const list = [
     ],
     data: [
       {
-        type: "有料",
+        prefix: "有料",
         matchs: [["この続きをみるには", "ノートを購入する"]],
       }
     ]
@@ -55,7 +55,7 @@ const list = [
     ],
     data: [
       {
-        type: "有料",
+        prefix: "有料",
         matchs: [["readmore-area"]]
       }
     ]
@@ -69,7 +69,7 @@ const list = [
     ],
     data: [
       {
-        type: "有料",
+        prefix: "有料",
         matchs: [["この記事は有料記事です。"]]
       }
     ]
@@ -83,7 +83,7 @@ const list = [
     ],
     data: [
       {
-        type: "有料",
+        prefix: "有料",
         matchs: [["こちらは有料会員記事です"]]
       }
     ]
@@ -97,11 +97,11 @@ const list = [
     ],
     data: [
       {
-        type: "",
+        prefix: "",
         matchs: [["無料登録して全文を読む"]]
       },
       {
-        type: "有料",
+        prefix: "有料",
         matchs: [["有料会員になると続きをお読みいただけます。"]]
       }
     ]
@@ -112,12 +112,12 @@ let cur = location.href;
 //null:開いてない、undefined:閉じた、文字列:type
 let isOpen: string | null | undefined = null;
 
-function insertHTML(type: string) {
+function insertHTML(prefix: string) {
   if (isOpen === undefined) {
     return;
   }
 
-  if (isOpen !== type) {
+  if (isOpen !== prefix) {
     close();
     isOpen = null;
   }
@@ -127,7 +127,7 @@ function insertHTML(type: string) {
     el.className = "login-pages-alert";
     const msg = document.createElement("div");
     msg.className = "msg";
-    msg.innerText = `このページは最後まで読むのに${type}会員登録が必要です。`;
+    msg.innerText = `このページは最後まで読むのに${prefix}会員登録が必要です。`;
     el.appendChild(msg);
     const by = document.createElement("div");
     by.className = "by";
@@ -140,7 +140,7 @@ function insertHTML(type: string) {
     el.appendChild(button);
 
     document.body.insertAdjacentElement("afterbegin", el);
-    isOpen = type;
+    isOpen = prefix;
   }
 }
 
@@ -166,7 +166,7 @@ function run() {
     if (site.url.some(url => matcher.isMatch(location.origin, url.origin, { caseSensitive: true }) && matcher.isMatch(location.pathname, url.pathname, { caseSensitive: true }))) {
       for (let data of site.data) {
         if (data.matchs.some(x => x.every(x => body.includes(x)))) {
-          insertHTML(data.type);
+          insertHTML(data.prefix);
           return;
         }
       }
