@@ -19,7 +19,7 @@ main =
 
 
 type alias Flag =
-    {}
+    List Type.Site
 
 
 type alias Model =
@@ -34,7 +34,7 @@ type Msg
 
 init : Flag -> ( Model, Cmd Msg )
 init flag =
-    ( [], Cmd.none )
+    ( flag, Cmd.none )
 
 
 view : Model -> Html Msg
