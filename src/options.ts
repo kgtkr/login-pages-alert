@@ -1,7 +1,10 @@
 // @ts-ignore
 import { Elm } from "./options/src/Main.elm";
+import { loadData, saveData } from "./common";
 
-Elm.Main.init({
+const app = Elm.Main.init({
   node: document.getElementById("root"),
-  flags: []
+  flags: loadData()
 });
+
+app.ports.save.subscribe(saveData);

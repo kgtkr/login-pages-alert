@@ -1,4 +1,4 @@
-module Main exposing (Flag, Model, Msg(..), init, main, subscriptions, update, view)
+port module Main exposing (Flag, Model, Msg(..), init, main, subscriptions, update, view)
 
 import Browser
 import Html exposing (Html, button, div, hr, input, text)
@@ -7,6 +7,9 @@ import Html.Events exposing (onClick, onInput)
 import List.Extra as LE
 import Site
 import Type
+
+
+port save : List Type.Site -> Cmd msg
 
 
 main =
@@ -44,17 +47,19 @@ view model =
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    ( case msg of
-        AddSite ->
-            { urlPatterns = [], kinds = [] } :: model
+    let
+        newModel =
+            case msg of
+                AddSite ->
+                    { urlPatterns = [], kinds = [] } :: model
 
-        RemoveSite i ->
-            LE.removeAt i model
+                RemoveSite i ->
+                    LE.removeAt i model
 
-        ChangeSite i m ->
-            LE.updateAt i (Site.update m) model
-    , Cmd.none
-    )
+                ChangeSite i m ->
+                    LE.updateAt i (Site.update m) model
+    in
+    ( newModel, save newModel )
 
 
 subscriptions : Model -> Sub Msg
