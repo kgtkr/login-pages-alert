@@ -4,7 +4,7 @@ import Bootstrap.Button as Button
 import Bootstrap.Form.Input as Input
 import Bootstrap.Form.InputGroup as InputGroup
 import Html exposing (Html, button, div, input, span, text)
-import Html.Attributes exposing (placeholder, value)
+import Html.Attributes exposing (placeholder, style, value)
 import Html.Events exposing (onClick, onInput)
 import List.Extra as LE
 import Type
@@ -27,11 +27,13 @@ view model =
             :: (model
                     |> List.indexedMap
                         (\i x ->
-                            InputGroup.config
-                                (InputGroup.text [ Input.value x, Input.onInput (Change i), Input.placeholder "bodyパターン" ])
-                                |> InputGroup.predecessors
-                                    [ InputGroup.button [ Button.onClick (Remove i) ] [ text "☓" ] ]
-                                |> InputGroup.view
+                            div [ style "margin-left" "10px" ]
+                                [ InputGroup.config
+                                    (InputGroup.text [ Input.value x, Input.onInput (Change i), Input.placeholder "bodyパターン" ])
+                                    |> InputGroup.predecessors
+                                        [ InputGroup.button [ Button.onClick (Remove i) ] [ text "☓" ] ]
+                                    |> InputGroup.view
+                                ]
                         )
                )
         )

@@ -4,7 +4,7 @@ import BodyPattern
 import Bootstrap.Button as Button
 import Bootstrap.Form.Input as Input
 import Html exposing (Html, button, div, input, span, text)
-import Html.Attributes exposing (placeholder, value)
+import Html.Attributes exposing (placeholder, style, value)
 import Html.Events exposing (onClick, onInput)
 import List.Extra as LE
 import Type
@@ -29,7 +29,7 @@ view model =
             :: (model.bodyPatterns
                     |> List.indexedMap
                         (\i x ->
-                            div []
+                            div [ style "margin-left" "10px" ]
                                 [ Button.button [ Button.onClick (RemoveBodyPattern i) ] [ text "☓" ]
                                 , x |> BodyPattern.view |> Html.map (ChangeBodyPattern i)
                                 ]
