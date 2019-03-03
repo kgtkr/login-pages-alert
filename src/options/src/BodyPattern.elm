@@ -21,7 +21,18 @@ type Msg
 
 view : Model -> Html Msg
 view model =
-    span [] (Button.button [ Button.onClick Add ] [ text "or条件を追加" ] :: (model |> List.indexedMap (\i x -> [ Button.button [ Button.onClick (Remove i) ] [ text "☓" ], Input.text [ Input.value x, Input.onInput (Change i), Input.placeholder "bodyパターン" ] ]) |> List.concat))
+    span []
+        (Button.button [ Button.onClick Add ] [ text "or条件を追加" ]
+            :: (model
+                    |> List.indexedMap
+                        (\i x ->
+                            [ Button.button [ Button.onClick (Remove i) ] [ text "☓" ]
+                            , Input.text [ Input.value x, Input.onInput (Change i), Input.placeholder "bodyパターン" ]
+                            ]
+                        )
+                    |> List.concat
+               )
+        )
 
 
 update : Msg -> Model -> Model

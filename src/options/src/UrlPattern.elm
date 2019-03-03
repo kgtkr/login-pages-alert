@@ -20,7 +20,17 @@ type Msg
 view : Model -> Html Msg
 view model =
     span []
-        [ Input.text [ Input.value model.origin, Input.onInput ChangeOrigin, Input.placeholder "origin" ], Input.text [ Input.value model.pathname, Input.onInput ChangePathname, Input.placeholder "pathname" ] ]
+        [ Input.text
+            [ Input.value model.origin
+            , Input.onInput ChangeOrigin
+            , Input.placeholder "origin"
+            ]
+        , Input.text
+            [ Input.value model.pathname
+            , Input.onInput ChangePathname
+            , Input.placeholder "pathname"
+            ]
+        ]
 
 
 update : Msg -> Model -> Model
