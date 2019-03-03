@@ -1,7 +1,7 @@
 module BodyPattern exposing (Model, Msg(..), update, view)
 
-import Html exposing (Html, button, div, input, text)
-import Html.Attributes exposing (value)
+import Html exposing (Html, button, div, input, span, text)
+import Html.Attributes exposing (placeholder, value)
 import Html.Events exposing (onClick, onInput)
 import List.Extra as LE
 import Type
@@ -19,7 +19,7 @@ type Msg
 
 view : Model -> Html Msg
 view model =
-    div [] (button [ onClick Add ] [ text "+" ] :: (model |> List.indexedMap (\i x -> [ input [ value x, onInput (Change i) ] [], button [ onClick (Remove i) ] [ text "☓" ] ]) |> List.concat))
+    span [] (button [ onClick Add ] [ text "or条件を追加" ] :: (model |> List.indexedMap (\i x -> [ button [ onClick (Remove i) ] [ text "☓" ], input [ value x, onInput (Change i), placeholder "bodyパターン" ] [] ]) |> List.concat))
 
 
 update : Msg -> Model -> Model

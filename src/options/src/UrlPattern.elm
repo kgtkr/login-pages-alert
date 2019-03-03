@@ -1,6 +1,6 @@
 module UrlPattern exposing (Model, Msg(..), update, view)
 
-import Html exposing (Html, button, div, input, text)
+import Html exposing (Html, button, div, input, span, text)
 import Html.Attributes exposing (placeholder, value)
 import Html.Events exposing (onClick, onInput)
 import List.Extra as LE
@@ -18,7 +18,7 @@ type Msg
 
 view : Model -> Html Msg
 view model =
-    div []
+    span []
         [ input [ value model.origin, onInput ChangeOrigin, placeholder "origin" ] [], input [ value model.pathname, onInput ChangePathname, placeholder "pathname" ] [] ]
 
 

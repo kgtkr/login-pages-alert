@@ -1,8 +1,8 @@
 module Main exposing (Flag, Model, Msg(..), init, main, subscriptions, update, view)
 
 import Browser
-import Html exposing (Html, button, div, input, text)
-import Html.Attributes exposing (placeholder, value)
+import Html exposing (Html, button, div, hr, input, text)
+import Html.Attributes exposing (placeholder, size, style, value)
 import Html.Events exposing (onClick, onInput)
 import List.Extra as LE
 import Site
@@ -39,7 +39,7 @@ init flag =
 
 view : Model -> Html Msg
 view model =
-    div [] (div [] [ button [ onClick AddSite ] [ text "+" ] ] :: (model |> List.indexedMap (\i x -> [ button [ onClick (RemoveSite i) ] [ text "☓" ], x |> Site.view |> Html.map (ChangeSite i) ]) |> List.concat))
+    div [] (div [] [ button [ onClick AddSite ] [ text "サイトを追加" ] ] :: (model |> List.indexedMap (\i x -> div [ style "border" "solid 1px #555", style "margin" "3px", style "padding" "3px" ] [ button [ onClick (RemoveSite i) ] [ text "☓" ], hr [] [], x |> Site.view |> Html.map (ChangeSite i) ])))
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )

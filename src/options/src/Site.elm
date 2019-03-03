@@ -1,7 +1,7 @@
 module Site exposing (Model, Msg(..), update, view)
 
-import Html exposing (Html, button, div, input, text)
-import Html.Attributes exposing (placeholder, value)
+import Html exposing (Html, button, div, hr, input, span, text)
+import Html.Attributes exposing (placeholder, style, value)
 import Html.Events exposing (onClick, onInput)
 import Kind
 import List.Extra as LE
@@ -24,9 +24,10 @@ type Msg
 
 view : Model -> Html Msg
 view model =
-    div []
-        [ div [] (div [] [ button [ onClick AddUrlPattern ] [ text "+" ] ] :: (model.urlPatterns |> List.indexedMap (\i x -> [ button [ onClick (RemoveUrlPattern i) ] [ text "☓" ], x |> UrlPattern.view |> Html.map (ChangeUrlPattern i) ]) |> List.concat))
-        , div [] (div [] [ button [ onClick AddKind ] [ text "+" ] ] :: (model.kinds |> List.indexedMap (\i x -> [ button [ onClick (RemoveKind i) ] [ text "☓" ], x |> Kind.view |> Html.map (ChangeKind i) ]) |> List.concat))
+    span []
+        [ div [] (div [] [ button [ onClick AddUrlPattern ] [ text "URLパターンを追加" ] ] :: (model.urlPatterns |> List.indexedMap (\i x -> div [] [ button [ onClick (RemoveUrlPattern i) ] [ text "☓" ], x |> UrlPattern.view |> Html.map (ChangeUrlPattern i) ])))
+        , hr [] []
+        , div [] (div [] [ button [ onClick AddKind ] [ text "タイプを追加" ] ] :: (model.kinds |> List.indexedMap (\i x -> div [ style "margin-top" "10px" ] [ button [ onClick (RemoveKind i) ] [ text "☓" ], x |> Kind.view |> Html.map (ChangeKind i) ])))
         ]
 
 
