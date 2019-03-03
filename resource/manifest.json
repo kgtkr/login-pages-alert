@@ -1,19 +1,13 @@
 {
     "manifest_version": 2,
     "name": "Login Pages Alert",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "description": "ログインなしだと途中までしか読めないニュース記事を警告します。",
     "content_scripts": [
         {
             "matches": [
-                "https://tech.nikkeibp.co.jp/*",
-                "https://www.nikkei.com/*",
-                "https://note.mu/*",
-                "https://www.kobe-np.co.jp/*",
-                "https://mainichi.jp/*",
-                "https://special.sankei.com/*",
-                "https://www.asahi.com/*",
-                "https://r.nikkei.com/*"
+                "http://*/*",
+                "https://*/*"
             ],
             "js": [
                 "app.js"
