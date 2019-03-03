@@ -34,7 +34,7 @@ update : Msg -> Model -> Model
 update msg model =
     case msg of
         AddUrlPattern ->
-            { model | urlPatterns = { origin = "", pathname = "String" } :: model.urlPatterns }
+            { model | urlPatterns = { origin = "", pathname = "" } :: model.urlPatterns }
 
         RemoveUrlPattern i ->
             { model | urlPatterns = LE.removeAt i model.urlPatterns }
