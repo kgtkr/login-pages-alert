@@ -2,6 +2,7 @@ module BodyPattern exposing (Model, Msg(..), update, view)
 
 import Bootstrap.Button as Button
 import Bootstrap.Form.Input as Input
+import Bootstrap.Form.InputGroup as InputGroup
 import Html exposing (Html, button, div, input, span, text)
 import Html.Attributes exposing (placeholder, value)
 import Html.Events exposing (onClick, onInput)
@@ -26,11 +27,12 @@ view model =
             :: (model
                     |> List.indexedMap
                         (\i x ->
-                            [ Button.button [ Button.onClick (Remove i) ] [ text "☓" ]
-                            , Input.text [ Input.value x, Input.onInput (Change i), Input.placeholder "bodyパターン" ]
-                            ]
+                            InputGroup.config
+                                (InputGroup.text [ Input.value x, Input.onInput (Change i), Input.placeholder "bodyパターン" ])
+                                |> InputGroup.predecessors
+                                    [ InputGroup.button [ Button.onClick (Remove i) ] [ text "☓" ] ]
+                                |> InputGroup.view
                         )
-                    |> List.concat
                )
         )
 
