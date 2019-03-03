@@ -13,8 +13,7 @@ type alias Model =
 
 
 type Msg
-    = None
-    | ChangeName String
+    = ChangeName String
     | ChangeBodyPattern Int BodyPattern.Msg
     | AddBodyPattern
     | RemoveBodyPattern Int
@@ -29,9 +28,6 @@ view model =
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        None ->
-            model
-
         ChangeName s ->
             { model | name = s }
 
