@@ -1,5 +1,7 @@
 module BodyPattern exposing (Model, Msg(..), update, view)
 
+import Bootstrap.Button as Button
+import Bootstrap.Form.Input as Input
 import Html exposing (Html, button, div, input, span, text)
 import Html.Attributes exposing (placeholder, value)
 import Html.Events exposing (onClick, onInput)
@@ -19,7 +21,7 @@ type Msg
 
 view : Model -> Html Msg
 view model =
-    span [] (button [ onClick Add ] [ text "or条件を追加" ] :: (model |> List.indexedMap (\i x -> [ button [ onClick (Remove i) ] [ text "☓" ], input [ value x, onInput (Change i), placeholder "bodyパターン" ] [] ]) |> List.concat))
+    span [] (Button.button [ Button.onClick Add ] [ text "or条件を追加" ] :: (model |> List.indexedMap (\i x -> [ Button.button [ Button.onClick (Remove i) ] [ text "☓" ], Input.text [ Input.value x, Input.onInput (Change i), Input.placeholder "bodyパターン" ] ]) |> List.concat))
 
 
 update : Msg -> Model -> Model

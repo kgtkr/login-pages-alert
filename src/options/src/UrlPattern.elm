@@ -1,5 +1,6 @@
 module UrlPattern exposing (Model, Msg(..), update, view)
 
+import Bootstrap.Form.Input as Input
 import Html exposing (Html, button, div, input, span, text)
 import Html.Attributes exposing (placeholder, value)
 import Html.Events exposing (onClick, onInput)
@@ -19,7 +20,7 @@ type Msg
 view : Model -> Html Msg
 view model =
     span []
-        [ input [ value model.origin, onInput ChangeOrigin, placeholder "origin" ] [], input [ value model.pathname, onInput ChangePathname, placeholder "pathname" ] [] ]
+        [ Input.text [ Input.value model.origin, Input.onInput ChangeOrigin, Input.placeholder "origin" ], Input.text [ Input.value model.pathname, Input.onInput ChangePathname, Input.placeholder "pathname" ] ]
 
 
 update : Msg -> Model -> Model

@@ -1,5 +1,10 @@
 port module Main exposing (Flag, Model, Msg(..), init, main, subscriptions, update, view)
 
+import Bootstrap.Button as Button
+import Bootstrap.CDN as CDN
+import Bootstrap.Card as Card
+import Bootstrap.Card.Block as Block
+import Bootstrap.Grid as Grid
 import Browser
 import Html exposing (Html, button, div, hr, input, text)
 import Html.Attributes exposing (placeholder, size, style, value)
@@ -42,7 +47,21 @@ init flag =
 
 view : Model -> Html Msg
 view model =
-    div [] (div [] [ button [ onClick AddSite ] [ text "サイトを追加" ] ] :: (model |> List.indexedMap (\i x -> div [ style "border" "solid 1px #555", style "margin" "3px", style "padding" "3px" ] [ button [ onClick (RemoveSite i) ] [ text "☓" ], hr [] [], x |> Site.view |> Html.map (ChangeSite i) ])))
+    Grid.container []
+        (CDN.stylesheet
+            :: div [] [ Button.button [ Button.onClick AddSite ] [ text "サイトを追加" ] ]
+            :: (model
+                    |> List.indexedMap
+                        (\i x ->
+                            Card.config []
+                                |> Card.header []
+                                    [ Button.button [ Button.onClick (RemoveSite i) ] [ text "☓" ]
+                                    ]
+                                |> Card.block [] [ Block.text [] [ x |> Site.view |> Html.map (ChangeSite i) ] ]
+                                |> Card.view
+                        )
+               )
+        )
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
