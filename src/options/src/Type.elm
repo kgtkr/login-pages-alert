@@ -10,7 +10,7 @@ type alias UrlPattern =
 
 
 type alias Kind =
-    { name : String, bodyPatterns : List BodyPattern }
+    { require : String, bodyPatterns : List BodyPattern }
 
 
 type alias BodyPattern =

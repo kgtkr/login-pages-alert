@@ -15,7 +15,7 @@ type alias Model =
 
 
 type Msg
-    = ChangeName String
+    = ChangeRequire String
     | ChangeBodyPattern Int BodyPattern.Msg
     | AddBodyPattern
     | RemoveBodyPattern Int
@@ -24,7 +24,7 @@ type Msg
 view : Model -> Html Msg
 view model =
     span []
-        (div [] [ Input.text [ Input.value model.name, Input.onInput ChangeName, Input.placeholder "名前" ] ]
+        (div [] [ Input.text [ Input.value model.require, Input.onInput ChangeRequire, Input.placeholder "必要な事" ] ]
             :: div [] [ Button.button [ Button.onClick AddBodyPattern ] [ text "and条件を追加" ] ]
             :: (model.bodyPatterns
                     |> List.indexedMap
@@ -41,8 +41,8 @@ view model =
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        ChangeName s ->
-            { model | name = s }
+        ChangeRequire s ->
+            { model | require = s }
 
         AddBodyPattern ->
             { model | bodyPatterns = [] :: model.bodyPatterns }

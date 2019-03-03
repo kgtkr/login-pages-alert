@@ -4,7 +4,7 @@ export interface Site {
     pathname: string
   }[],
   kinds: {
-    name: string,
+    require: string,
     bodyPatterns: string[][]
   }[]
 }
@@ -25,7 +25,7 @@ export function loadData(): Site[] {
           }],
         kinds: [
           {
-            name: "有料",
+            require: "有料会員登録",
             bodyPatterns: [["この先は有料会員の登録が必要です。"]]
           },
         ]
@@ -43,7 +43,7 @@ export function loadData(): Site[] {
         ],
         kinds: [
           {
-            name: "",
+            require: "会員登録",
             bodyPatterns: [["この記事は会員限定です"]]
           }
         ]
@@ -57,7 +57,7 @@ export function loadData(): Site[] {
         ],
         kinds: [
           {
-            name: "有料",
+            require: "有料ノートの購入",
             bodyPatterns: [["この続きをみるには", "ノートを購入する"]],
           }
         ]
@@ -71,7 +71,7 @@ export function loadData(): Site[] {
         ],
         kinds: [
           {
-            name: "有料",
+            require: "有料会員登録",
             bodyPatterns: [["readmore-area"]]
           }
         ]
@@ -85,7 +85,7 @@ export function loadData(): Site[] {
         ],
         kinds: [
           {
-            name: "有料",
+            require: "有料会員登録",
             bodyPatterns: [["この記事は有料記事です。"]]
           }
         ]
@@ -99,7 +99,7 @@ export function loadData(): Site[] {
         ],
         kinds: [
           {
-            name: "有料",
+            require: "有料会員登録",
             bodyPatterns: [["こちらは有料会員記事です"]]
           }
         ]
@@ -113,11 +113,11 @@ export function loadData(): Site[] {
         ],
         kinds: [
           {
-            name: "",
+            require: "会員登録",
             bodyPatterns: [["無料登録して全文を読む"]]
           },
           {
-            name: "有料",
+            require: "有料会員登録",
             bodyPatterns: [["有料会員になると続きをお読みいただけます。"]]
           }
         ]

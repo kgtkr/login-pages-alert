@@ -22,7 +22,7 @@ function main() {
       el.className = "login-pages-alert";
       const msg = document.createElement("div");
       msg.className = "msg";
-      msg.innerText = `このページは最後まで読むのに${kind}会員登録が必要です。`;
+      msg.innerText = `このページは最後まで読むのに${kind}が必要です。`;
       el.appendChild(msg);
       const by = document.createElement("div");
       by.className = "by";
@@ -61,7 +61,7 @@ function main() {
       if (site.urlPatterns.some(url => matcher.isMatch(location.pathname, url.pathname, { caseSensitive: true }))) {
         for (let kind of site.kinds) {
           if (kind.bodyPatterns.some(x => x.every(x => body.includes(x)))) {
-            insertHTML(kind.name);
+            insertHTML(kind.require);
             return;
           }
         }
